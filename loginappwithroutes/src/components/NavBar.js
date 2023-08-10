@@ -19,7 +19,7 @@ function NavBar(){
             <Link to="/"> Home </Link>
             <Link to="/about" state={{data: data}}> AboutUs </Link>
             <Link to="/customers/:custId" state={customerData}> Customers </Link>
-            
+            <Link to="/customernew">Add New Customer</Link>
         </div>
     );
 }
