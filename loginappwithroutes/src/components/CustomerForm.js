@@ -10,6 +10,26 @@ function CustomerForm(){
     );
 
     const {firstName,lastName,email,phone}=customer ; //destructring
+    
+    const [formInputData,setFormInputData]=useState(
+        {
+            fiFirstName:"",
+            fiLastName:"",
+            fiEmail:"",
+            fiPhone:""
+        }
+    );
+ 
+    const {fiFirstName,fiLastName,fiEmail,fiPhone}=formInputData ; //destructring
+    //After successfull validation set input data 
+    const setFormInputDataForDisplay=(customer)=>{
+        /**
+        setFormInputData(
+            {
+                ...customer
+            }
+        ); */
+    }
     const handleChange = (event)=>{
         setCustomer(
             {
@@ -21,6 +41,7 @@ function CustomerForm(){
     const handleSubmit =(event)=>{
         event.preventDefault();
         //validateCustomer before doing anything with the data
+        setFormInputDataForDisplay(customer);
         console.log(customer);
     };
 
@@ -53,6 +74,10 @@ function CustomerForm(){
                 </div>
             </div>
             </form>
+
+            <div>   
+               {/** {formInputData.fiFirstName} */}
+                </div>
         </div>
     );
 }
