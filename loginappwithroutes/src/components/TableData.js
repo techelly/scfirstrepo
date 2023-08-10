@@ -16,9 +16,27 @@ export default function TableData() {
     );
   }
    */
-
+import {useState} from 'react';
   export default function TableData({tableData}){
+    const [selectedCustomer,setSelectedCustomer]=useState(
+        {
+            firstName:"",
+            lastName:"",
+            email:"",
+            phone:""
+        }
+    );
+    const onCustomerSelect=(e,data)=>{
+        console.log("Selected ---"+data.id);
+         setSelectedCustomer(
+             {
+                 ...data,[e.target.name]:[e.target.value]
+             }
+         );
+    }
     return(
+        <div className="container">
+        <div>
         <table className="table">
             <thead>
                 <tr>
@@ -32,7 +50,7 @@ export default function TableData() {
             {
                 tableData.map((data, index)=>{
                     return(
-                        <tr key={index}>
+                        <tr onClick={e=>onCustomerSelect(e,data)} key={index}>
                             <td>{data.firstName}</td>
                             <td>{data.lastName}</td>
                             <td>{data.email}</td>
@@ -43,6 +61,13 @@ export default function TableData() {
             }
             </tbody>
         </table>
-    )
+        </div>
+        <div>
+            {selectedCustomer.firstName}
+            {selectedCustomer.lastName}
+            {selectedCustomer.email}
+            {selectedCustomer.phone}
+        </div>
+        </div>
+    );
 }
-
