@@ -1,4 +1,5 @@
 import {useState} from 'react';
+import TableData from './TableData';
 function CustomerForm(){
     const [customer,setCustomer]=useState(
         {
@@ -8,28 +9,12 @@ function CustomerForm(){
             phone:""
         }
     );
-
+    let isFormValid = false;
+    let errors ={};
+  
     const {firstName,lastName,email,phone}=customer ; //destructring
-    
-    const [formInputData,setFormInputData]=useState(
-        {
-            fiFirstName:"",
-            fiLastName:"",
-            fiEmail:"",
-            fiPhone:""
-        }
-    );
- 
-    const {fiFirstName,fiLastName,fiEmail,fiPhone}=formInputData ; //destructring
-    //After successfull validation set input data 
-    const setFormInputDataForDisplay=(customer)=>{
-        /**
-        setFormInputData(
-            {
-                ...customer
-            }
-        ); */
-    }
+    const [tableData,setTableData]=useState([]);
+  
     const handleChange = (event)=>{
         setCustomer(
             {
@@ -41,14 +26,49 @@ function CustomerForm(){
     const handleSubmit =(event)=>{
         event.preventDefault();
         //validateCustomer before doing anything with the data
-        setFormInputDataForDisplay(customer);
-        console.log(customer);
+        validateCustomer();
+        //setFormInputDataForDisplay(customer);
+        if(isFormValid){
+           const newData =(data)=>([...data,customer]);
+           setTableData(newData);
+            console.log(customer);
+        }
+        clearForm(event);
+       
     };
 
+    const clearForm=(event)=>{
+        setCustomer( {
+            firstName:"",
+            lastName:"",
+            email:"",
+            phone:""
+        });
+    }
     const validateCustomer=()=>{
         //logic to validate customer data
+       
+        if(customer.firstName === ""){
+            errors.firstName="First Name cannot be empty";
+        }
+        if(customer.lastName === ""){
+            errors.lastName="Last Name cannot be empty";
+        }
+        if(customer.email === ""){
+            errors.email="Email cannot be empty";
+        }
+        if(customer.phone === ""){
+            errors.phone="Phone cannot be empty";
+        }
+
+        const noOfErrors=Object.keys(errors).length;
+        if(noOfErrors === 0){ 
+            isFormValid=true;
+        }
+        //setErrors(errors);
     };
     return (
+        <div>
         <div className="container">
             <h1>Add New Customer details</h1>
             <form onSubmit={handleSubmit}>
@@ -72,13 +92,19 @@ function CustomerForm(){
                 <div className="col"> 
                 <input type="submit" name="submit"/>
                 </div>
+                
             </div>
             </form>
-
-            <div>   
-               {/** {formInputData.fiFirstName} */}
-                </div>
+          
+        
+     
         </div>
+        <div>   
+        {/** {formInputData.fiFirstName} */}
+        <TableData tableData={tableData}/>
+     </div>
+     </div>
+     
     );
 }
 
