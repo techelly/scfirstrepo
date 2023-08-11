@@ -34,18 +34,29 @@ import {useState} from 'react';
              }
          );
     }
+    let getIndex;
+    const toEdit=(e,data,index)=>{
+        getIndex=index;
+        e.preventDefault();
+
+    }
+    const toDelete=(e,index)=>{
+        e.preventDefault();
+    }
     return(
         <div className="container">
         <div>
-        <table className="table">
-            <thead>
+        <div><caption>Customer Lists</caption></div>
+        <table className="table table-bordered">
+            
+            <thead className="table-dark">
                 <tr>
-                    <th>Id</th>
-                    <th>First Name</th>
-                    <th>Last Name</th>
-                    <th>Email</th>
-                    <th>Phone</th>
-                    <th>Actions</th>
+                    <th scope="col">Id</th>
+                    <th scope="col">First Name</th>
+                    <th scope="col">Last Name</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Phone</th>
+                    <th scope="col">Actions</th>
                 </tr>
             </thead>
             <tbody>
@@ -53,12 +64,14 @@ import {useState} from 'react';
                 tableData.map((data, index)=>{
                     return(
                         <tr onClick={e=>onCustomerSelect(e,data)} key={index}>
-                            <td>{index+1}</td>
+                            <td scoper="row">{index+1}</td>
                             <td>{data.firstName}</td>
                             <td>{data.lastName}</td>
                             <td>{data.email}</td>
                             <td>{data.phone}</td>
-                            <td>Show Edit Delete</td>
+                            <td><a href="#"onClick={(e)=>onCustomerSelect(e,data,index)}>Show</a> {' '}
+                            <a href="#"onClick={(e)=>toEdit(e,data,index)}>Edit</a> {' '}
+                            <a href="#"onClick={(e)=>toDelete(e,index)}>Delete</a></td>{' '}
                         </tr>
                     )
                 })

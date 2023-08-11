@@ -70,45 +70,45 @@ function CustomerForm(){
         //setErrors(errors);
     };
     return (
-        <div>
-        <div>
-        <Link to="/customerlist">Back to Customers List</Link>
-            </div>
+              
         <div className="container">
-            <h1>Add Customer </h1>
+            <div className="nav-link">
+                <Link to="/customerlist" state={tableData}> Back to Customers List</Link>
+            </div>
+            <h2>Add Customer </h2>
             <form onSubmit={handleSubmit}>
-            <div className="form-row row">
-                <div className="col">
+            <div className="form-group">
+                
                 <label>First Name : </label>
                 <input type="text" onChange={handleChange} value={firstName} name="firstName" className="form-control" placeholder="Please enter first name" />
-                </div>    
-                <div className="col">
+            </div>    
+            <div className="form-group">
                 <label>Last Name : </label>
                 <input type="text" onChange={handleChange} value={lastName} name="lastName" className="form-control" placeholder="Please enter last name" />
-                </div> 
-                <div className="col">
+            </div> 
+            <div className="form-group">
                 <label>Email : </label>
                 <input type="text" onChange={handleChange} value={email} name="email" className="form-control" placeholder="Please enter email details" />
-                </div> 
-                <div className="col">
+            </div> 
+            <div className="form-group">
                 <label>Phone : </label>
                 <input type="text" onChange={handleChange} value={phone} name="phone" className="form-control" placeholder="Please enter phone no" />
-                </div>
-                <div className="col"> 
-                <input type="submit" name="submit" value="Create Customer"/>
-                </div>
-                
             </div>
+            <div className="form-group"> 
+                <input type="submit" name="submit" class="btn btn-info" value="Create Customer"/>
+            </div>
+                
+            
             </form>
-          
-        
-     
-        </div>
-        <div>   
+            <div>   
         {/** {formInputData.fiFirstName} */}
+        
          <TableData tableData={tableData}/>
         {/**<CustomerList tableData={tableData}/>**/}
-        </div>
+        </div>  
+        
+     
+        
      </div>
      
     );

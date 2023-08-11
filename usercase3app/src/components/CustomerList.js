@@ -1,6 +1,10 @@
-import {Link} from 'react-router-dom';
+import {Link,useLocation} from 'react-router-dom';
 import TableData from './TableData';
-function CustomerList({tableData}){
+
+function CustomerList(props){
+    const location = useLocation();
+    const propsData=location.state;
+    console.log(propsData);
     return(
         <div className="container">
             <div>
@@ -8,7 +12,8 @@ function CustomerList({tableData}){
             </div>
             <div>   
              <h2>Customers List</h2>
-             {/**<TableData tableData={tableData}/>*/}
+           
+             {<TableData tableData={propsData}/>}
             </div>
         </div>
     );
