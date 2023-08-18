@@ -1,6 +1,7 @@
 package jdbcapp.dao;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -11,12 +12,30 @@ import jdbcapp.model.Customer;
 import jdbcapp.util.DBUtil;
 import jdbcapp.util.QueryMapper;
 
-public class CustomerDAOImpl implements CustomerDAO{
+public class CustomerDAOImpl implements CustomerDAO {
 
 	@Override
 	public String addCustomer(Customer customer) {
-		// TODO Auto-generated method stub
-		return null;
+		Connection conn = DBUtil.getDBConnection();
+		PreparedStatement ps;
+		try {
+			ps = conn.prepareStatement(QueryMapper.ADD_CUSTOMER);
+			ps.setInt(1, customer.getCustomerId());
+			ps.setString(2, customer.getName());
+			ps.setString(3, customer.getMailId());
+			ps.setString(4, customer.getContact());
+			ps.setString(5, customer.getAccount());
+			int row = ps.executeUpdate();
+			if (row > 0) {
+				return "New customer inserted into database";
+			}
+			ps.close();
+			conn.close();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return "Unable to insert new customer into database";
 	}
 
 	@Override
@@ -33,8 +52,26 @@ public class CustomerDAOImpl implements CustomerDAO{
 
 	@Override
 	public String deleteCustomer(Integer customerId) {
-		// TODO Auto-generated method stub
-		return null;
+		// Connection object
+		Connection conn = DBUtil.getDBConnection();
+		PreparedStatement pstmt;
+		// JDBC statement
+		try {
+			pstmt = conn.prepareStatement(QueryMapper.DELETE_CUSTOMER);
+			pstmt.setInt(1, customerId);
+			int row = pstmt.executeUpdate();// return no of rows effected
+			if (row > 0) {
+				return "Deleted customer with customerId ---" + customerId + " successfully";
+			}
+			// Close the open connection,statement or resultset
+			pstmt.close();
+			conn.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		// Return desired result
+		return "Not able to find the customer with customer id --- " + customerId;
 	}
 
 	@Override
@@ -44,11 +81,11 @@ public class CustomerDAOImpl implements CustomerDAO{
 		Statement stmt;
 		ResultSet rs;
 		Customer customer;
-		List<Customer> listOfCustomer= new ArrayList<Customer>();
+		List<Customer> listOfCustomer = new ArrayList<Customer>();
 		try {
 			stmt = conn.createStatement();
 			rs = stmt.executeQuery(QueryMapper.GET_ALL_CUSTOMERS);
-			while(rs.next()) {
+			while (rs.next()) {
 				customer = new Customer();
 				customer.setCustomerId(rs.getInt(1));
 				customer.setName(rs.getString(2));

@@ -12,6 +12,16 @@ public class MainApp {
 		CustomerService customerService = new CustomerServiceImpl();
 		List<Customer> listOfCustomers=customerService.getAllCustomers();
 		System.out.println(listOfCustomers);
+		
+		Customer customer = new Customer();
+		customer.setCustomerId(5);
+		customer.setMailId("akash@gmail.com");
+		customer.setName("Kamal");
+		customer.setAccount("current");
+		customer.setContact("1115555555");
+		
+		String message = customerService.addCustomer(customer);
+		System.out.println(message);
 	}
 
 }
