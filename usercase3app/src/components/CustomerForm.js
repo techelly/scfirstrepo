@@ -73,7 +73,7 @@ function CustomerForm(){
               
         <div className="container">
             <div className="nav-link">
-                <Link to="/customerlist" state={tableData}> Back to Customers List</Link>
+                <Link to="/customerlist" tdata={tableData}> Back to Customers List</Link>
             </div>
             <h2>Add Customer </h2>
             <form onSubmit={handleSubmit}>

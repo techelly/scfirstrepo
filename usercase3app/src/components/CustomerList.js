@@ -3,7 +3,7 @@ import TableData from './TableData';
 
 function CustomerList(props){
     const location = useLocation();
-    const propsData=location.state;
+    const propsData=location.tdata;
     console.log(propsData);
     return(
         <div className="container">

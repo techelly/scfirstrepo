@@ -87,10 +87,10 @@ function CustomerForm(){
                 </div> 
                 <div className="col">
                 <label>Phone : </label>
-                <input type="text" onChange={handleChange} value={phone} name="phone" className="form-control" placeholder="Phone" />
+                <input type="text" onChange={handleChange} value={phone} name="phone" className="form-control" placeholder="Please enter Phone" />
                 </div>
                 <div className="col"> 
-                <input type="submit" name="submit"/>
+                <input type="submit" name="submit" value="Create Customer"/>
                 </div>
                 
             </div>
