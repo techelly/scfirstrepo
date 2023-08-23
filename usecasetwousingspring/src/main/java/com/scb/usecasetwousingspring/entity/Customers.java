@@ -1,5 +1,7 @@
 package com.scb.usecasetwousingspring.entity;
 
+import java.util.List;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -9,6 +11,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import lombok.ToString.Exclude;
 
 @Getter
 @Setter
@@ -26,5 +29,6 @@ public class Customers {
 	private String active;
 	//inverse side
 	@OneToMany(cascade=CascadeType.ALL, mappedBy="customers")
-	private Accounts accounts;//HAS-A
+	@Exclude
+	private List<Accounts> accounts;//HAS-A
 }
