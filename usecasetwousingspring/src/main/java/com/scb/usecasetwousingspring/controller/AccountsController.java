@@ -12,8 +12,11 @@ import com.scb.usecasetwousingspring.entity.Accounts;
 import com.scb.usecasetwousingspring.exceptions.AccountsNotFoundException;
 import com.scb.usecasetwousingspring.service.AccountsService;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
+
 @RestController
 @RequestMapping("/api/accounts")
+@Tag(name = "Accounts API",description="APIs for Accounts")
 public class AccountsController {
 	
 	@Autowired

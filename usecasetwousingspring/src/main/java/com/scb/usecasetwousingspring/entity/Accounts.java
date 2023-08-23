@@ -2,7 +2,11 @@ package com.scb.usecasetwousingspring.entity;
 
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -13,6 +17,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import lombok.ToString.Exclude;
 
 @Getter
 @Setter
@@ -29,6 +34,8 @@ public class Accounts {
 	private String accountBranch;
 	private Double accountBalance;
 	//owning side
-	@ManyToOne @JoinColumn(name="custId", nullable=false)
+	@ManyToOne(cascade = CascadeType.ALL,fetch=FetchType.LAZY) @JoinColumn(name="custId", nullable=false)
+	@Exclude
+	@JsonIgnore
 	private Customers customers;
 }

@@ -2,8 +2,12 @@ package com.scb.usecasetwousingspring.entity;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import lombok.AllArgsConstructor;
@@ -21,6 +25,7 @@ import lombok.ToString.Exclude;
 @Entity
 public class Customers {
 	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Integer custId;//Primary Key
 	private String firstName;
 	private String lastName;
@@ -30,5 +35,6 @@ public class Customers {
 	//inverse side
 	@OneToMany(cascade=CascadeType.ALL, mappedBy="customers")
 	@Exclude
+	@JsonIgnore
 	private List<Accounts> accounts;//HAS-A
 }
