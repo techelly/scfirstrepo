@@ -38,7 +38,7 @@ import {useState} from 'react';
     const toEdit=(e,data,index)=>{
         getIndex=index;
         e.preventDefault();
-
+        
     }
     const toDelete=(e,index)=>{
         e.preventDefault();

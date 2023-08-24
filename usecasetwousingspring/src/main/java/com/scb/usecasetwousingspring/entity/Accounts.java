@@ -33,9 +33,13 @@ public class Accounts {
 	private Integer accountNumber;
 	private String accountBranch;
 	private Double accountBalance;
+	/**
 	//owning side
 	@ManyToOne(cascade = CascadeType.ALL,fetch=FetchType.LAZY) @JoinColumn(name="custId", nullable=false)
 	@Exclude
 	@JsonIgnore
 	private Customers customers;
+	**/
+	
+	
 }
