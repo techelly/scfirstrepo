@@ -18,7 +18,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 @RestController
 @RequestMapping("/api/accounts")
 @Tag(name = "Accounts API",description="APIs for Accounts")
-@CrossOrigin("*")
+//@CrossOrigin("*")
 public class AccountsController {
 	
 	@Autowired

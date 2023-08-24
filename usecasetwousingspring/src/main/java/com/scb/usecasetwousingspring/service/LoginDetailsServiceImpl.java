@@ -20,7 +20,7 @@ public class LoginDetailsServiceImpl implements LoginDetailsService {
 
 	@Override
 	public LoginDetails getLoginDetails(String emailId) {
-		
+		//Check whether email id exists
 		return loginRepo.findByEmail(emailId);
 	}
 
